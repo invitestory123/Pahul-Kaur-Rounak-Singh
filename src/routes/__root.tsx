@@ -77,14 +77,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "An Illustrated Wedding Invitation" },
+      { title: "Pahul Kaur & Rounak Singh — Wedding Invitation" },
       {
         name: "description",
-        content: "A hand-painted, animated Indian wedding storybook invitation.",
+        content:
+          "Join Pahul Kaur and Rounak Singh on Saturday, 19 December 2026 at Golden Heritage. An illustrated wedding storybook invitation.",
       },
       { name: "theme-color", content: "#fdf8ef" },
+      { property: "og:title", content: "Pahul Kaur & Rounak Singh — Wedding Invitation" },
+      {
+        property: "og:description",
+        content:
+          "Join Pahul Kaur and Rounak Singh on Saturday, 19 December 2026 at Golden Heritage. An illustrated wedding storybook invitation.",
+      },
+      { property: "og:image", content: "/og-image.jpg" },
+      {
+        property: "og:image:alt",
+        content: "Pahul Kaur & Rounak Singh — Wedding Invitation",
+      },
+      { property: "og:image:type", content: "image/jpeg" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Pahul Kaur & Rounak Singh — Wedding Invitation" },
+      {
+        name: "twitter:description",
+        content:
+          "Join Pahul Kaur and Rounak Singh on Saturday, 19 December 2026 at Golden Heritage. An illustrated wedding storybook invitation.",
+      },
+      { name: "twitter:image", content: "/og-image.jpg" },
     ],
     links: [
       {

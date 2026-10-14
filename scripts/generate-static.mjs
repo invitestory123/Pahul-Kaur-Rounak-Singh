@@ -61,6 +61,16 @@ async function generateStaticHtml() {
     <title>Pahul Kaur &amp; Rounak Singh — Wedding Invitation</title>
     <meta name="description" content="Join Pahul Kaur and Rounak Singh on Saturday, 19 December 2026 at Golden Heritage. An illustrated wedding storybook." />
     <meta name="theme-color" content="#fdf8ef" />
+    <meta property="og:title" content="Pahul Kaur &amp; Rounak Singh — Wedding Invitation" />
+    <meta property="og:description" content="Join Pahul Kaur and Rounak Singh on Saturday, 19 December 2026 at Golden Heritage. An illustrated wedding storybook." />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image:alt" content="Pahul Kaur &amp; Rounak Singh — Wedding Invitation" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pahul Kaur &amp; Rounak Singh — Wedding Invitation" />
+    <meta name="twitter:description" content="Join Pahul Kaur and Rounak Singh on Saturday, 19 December 2026 at Golden Heritage." />
+    <meta name="twitter:image" content="/og-image.jpg" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />

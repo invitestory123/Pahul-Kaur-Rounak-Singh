@@ -12,16 +12,32 @@ import { invitation } from "@/content/invitation";
 
 const title = `${invitation.couple.bride} & ${invitation.couple.groom} — Wedding Invitation`;
 const description = `Join ${invitation.couple.bride} and ${invitation.couple.groom} on ${invitation.dateLabel} at ${invitation.venue.name}. An illustrated storybook wedding celebration.`;
+const ogImage = "/og-image.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
+      // Open Graph
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:image", content: ogImage },
+      {
+        property: "og:image:alt",
+        content: `${invitation.couple.bride} & ${invitation.couple.groom} — Wedding Invitation`,
+      },
+      { property: "og:image:type", content: "image/jpeg" },
       { property: "og:type", content: "website" },
+      // Twitter
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: ogImage },
+      {
+        name: "twitter:image:alt",
+        content: `${invitation.couple.bride} & ${invitation.couple.groom} — Wedding Invitation`,
+      },
     ],
   }),
   component: Index,
