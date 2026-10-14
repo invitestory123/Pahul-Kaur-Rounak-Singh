@@ -158,27 +158,57 @@ export function Hero() {
           {invitation.hero.blessing}
         </motion.p>
 
-        <motion.a
-          href="#itinerary"
+        <motion.button
+          type="button"
+          onClick={() => {
+            const target =
+              document.getElementById("story") ||
+              document.getElementById("itinerary") ||
+              document.getElementById("details");
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+              window.scrollTo({
+                top: window.innerHeight,
+                behavior: "smooth",
+              });
+            }
+          }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.3 }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="glass-plate shimmer mt-8 sm:mt-9 rounded-full px-8 py-3.5 font-sans text-xs tracking-[0.24em] uppercase transition-all shadow-md hover:shadow-lg"
+          className="glass-plate shimmer mt-8 sm:mt-9 rounded-full px-8 py-3.5 font-sans text-xs tracking-[0.24em] uppercase transition-all shadow-md hover:shadow-lg cursor-pointer"
         >
           <span className="gold-text shimmer font-bold tracking-[0.22em]">
             {invitation.hero.eyebrow}
           </span>
-        </motion.a>
+        </motion.button>
 
-        <motion.div
-          className="mt-auto mb-8 text-primary/50"
+        <motion.button
+          type="button"
+          onClick={() => {
+            const target =
+              document.getElementById("story") ||
+              document.getElementById("itinerary") ||
+              document.getElementById("details");
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+              window.scrollTo({
+                top: window.innerHeight,
+                behavior: "smooth",
+              });
+            }
+          }}
+          aria-label="Scroll down to open invitation"
+          className="mt-auto mb-8 text-primary/50 hover:text-primary transition-colors cursor-pointer"
           animate={reduced ? {} : { y: [0, 8, 0] }}
           transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
         >
           <ChevronDown size={22} />
-        </motion.div>
+        </motion.button>
       </motion.div>
     </section>
   );

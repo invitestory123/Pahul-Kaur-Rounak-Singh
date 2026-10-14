@@ -35,9 +35,22 @@ export function IntroGate() {
     // Start music right on the first user interaction
     musicStore.setPlaying(true);
     const el = videoRef.current;
-    if (!el) return;
+    if (!el) {
+      finish();
+      return;
+    }
     el.currentTime = 0;
-    void el.play();
+    const playPromise = el.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // If video fails or is blocked, immediately finish to reveal the invite
+        finish();
+      });
+    }
+    // Safety fallback: if video is slow or network stalls, finish automatically
+    window.setTimeout(() => {
+      finish();
+    }, 4200);
   };
 
 
