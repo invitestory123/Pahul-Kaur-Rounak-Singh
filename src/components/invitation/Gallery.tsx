@@ -45,7 +45,7 @@ export function Gallery() {
                     loading="lazy"
                     width={1024}
                     height={1024}
-                    className={`${p.ratio} h-full w-full object-cover object-top transition-transform duration-[1400ms] group-hover:scale-[1.05]`}
+                    className={`${p.ratio} h-full w-full object-cover object-center transition-transform duration-[1400ms] group-hover:scale-[1.05]`}
                   />
                   <div
                     aria-hidden

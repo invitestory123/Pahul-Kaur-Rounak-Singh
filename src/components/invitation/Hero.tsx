@@ -119,28 +119,33 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.2 }}
-          className="font-sans text-[0.62rem] tracking-[0.5em] text-primary/70 uppercase sm:text-xs"
+          className="font-sans text-xs sm:text-sm font-bold tracking-[0.22em] sm:tracking-[0.28em] text-primary uppercase drop-shadow-sm"
         >
           {invitation.hero.kicker}
         </motion.p>
 
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 22, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 text-5xl leading-[0.95] text-primary drop-shadow-[0_2px_18px_rgba(255,255,255,0.55)] sm:text-6xl md:text-7xl"
+          className="mt-5 sm:mt-6 flex flex-col items-center justify-center text-center font-calligraphy text-primary drop-shadow-[0_2px_14px_rgba(255,255,255,0.75)]"
         >
-          {invitation.couple.bride}
-          <span className="mx-3 font-script text-3xl italic sm:text-4xl">&amp;</span>
-          <br className="sm:hidden" />
-          {invitation.couple.groom}
-        </motion.h1>
+          <span className="text-5xl sm:text-7xl md:text-8xl leading-[1.05] font-normal tracking-wide">
+            {invitation.couple.groom}
+          </span>
+          <span className="my-0.5 sm:my-1.5 font-script text-2xl sm:text-3xl italic text-gold-deep">
+            &amp;
+          </span>
+          <span className="text-5xl sm:text-7xl md:text-8xl leading-[1.05] font-normal tracking-wide">
+            {invitation.couple.bride}
+          </span>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scaleX: 0.4 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 1.2, delay: 0.9 }}
-          className="mt-6 h-px w-40 origin-center"
+          className="mt-6 h-[1.5px] w-44 sm:w-56 origin-center"
           style={{ background: "var(--gradient-gold)" }}
         />
 
@@ -148,21 +153,23 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 1.05 }}
-          className="mt-5 font-script text-xl text-primary/80 italic sm:text-2xl"
+          className="mt-5 font-script text-xl text-primary/85 italic sm:text-2xl"
         >
           {invitation.hero.blessing}
         </motion.p>
 
         <motion.a
-          href="#details"
+          href="#itinerary"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.3 }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="glass-plate shimmer mt-9 rounded-full px-8 py-3 font-sans text-[0.7rem] tracking-[0.32em] uppercase"
+          className="glass-plate shimmer mt-8 sm:mt-9 rounded-full px-8 py-3.5 font-sans text-xs tracking-[0.24em] uppercase transition-all shadow-md hover:shadow-lg"
         >
-          <span className="gold-text shimmer font-semibold">{invitation.hero.eyebrow}</span>
+          <span className="gold-text shimmer font-bold tracking-[0.22em]">
+            {invitation.hero.eyebrow}
+          </span>
         </motion.a>
 
         <motion.div

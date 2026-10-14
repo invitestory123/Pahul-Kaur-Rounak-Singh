@@ -29,6 +29,7 @@
 
   --font-display: "Marcellus", ui-serif, Georgia, serif;
   --font-script: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-calligraphy: "Great Vibes", cursive;
   --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
@@ -165,6 +166,10 @@
         transparent 55%
       );
   }
+}
+
+@utility font-calligraphy {
+  font-family: var(--font-calligraphy);
 }
 
 @utility gold-text {

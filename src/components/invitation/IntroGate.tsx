@@ -32,6 +32,8 @@ export function IntroGate() {
   const open = () => {
     if (stage !== "seal") return;
     setStage("film");
+    // Start music right on the first user interaction
+    musicStore.setPlaying(true);
     const el = videoRef.current;
     if (!el) return;
     el.currentTime = 0;
@@ -42,7 +44,7 @@ export function IntroGate() {
   const finish = () => {
     if (fading) return;
     setFading(true);
-    // Start the wedding music melody as the envelope dissolves into the main hero page
+    // Ensure music is playing as we dissolve into the main invitation
     musicStore.setPlaying(true);
     window.setTimeout(() => {
       setStage("done");
@@ -108,6 +110,21 @@ export function IntroGate() {
           animate={{ opacity: [0.35, 0.8, 0.35], scale: [0.9, 1.15, 0.9] }}
           transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
         />
+
+        {/* Prominent "Click to open invite" call-to-action */}
+        <motion.div
+          className="pointer-events-none absolute bottom-[14%] sm:bottom-[16%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <span className="glass-plate shimmer rounded-full border border-gold/60 px-6 py-2.5 font-sans text-xs tracking-[0.24em] font-bold text-primary uppercase shadow-xl backdrop-blur-md">
+            Click to open invite
+          </span>
+          <span className="font-script text-xs sm:text-sm italic text-primary/75">
+            Tap seal to unfold the invitation
+          </span>
+        </motion.div>
       </motion.button>
 
       {/* Skip */}

@@ -24,8 +24,8 @@ export function MusicSection() {
       <div className="mx-auto max-w-3xl text-center">
         <SectionTitle
           eyebrow="The Wedding Melody"
-          title="Shagna Di Shab"
-          note="Salma sitaaron wali · Teri kudmai ke din aa gaye"
+          title="Sunehra"
+          note="Phullaan Naal Sajjeya Jehda · Lost Stories & Jai Dhir"
         />
         <Ornament className="mt-8" />
 
@@ -101,25 +101,24 @@ export function MusicSection() {
               <div className="flex items-center justify-center gap-2 text-gold-deep mb-4">
                 <Sparkles size={16} />
                 <span className="font-sans text-[0.62rem] tracking-[0.3em] uppercase font-semibold">
-                  The Song of Kudmai
+                  The Song of Celebration
                 </span>
                 <Sparkles size={16} />
               </div>
 
               <div className="space-y-4 font-script text-xl sm:text-2xl italic leading-relaxed text-primary">
                 <p className="text-primary/95">
-                  &ldquo;Salma sitaaron wali, shagna di shab aayi re...<br />
-                  Banno se baane ke milne ki jo <span className="font-normal font-sans not-italic text-lg text-primary">रुत</span> laayi re...<br />
-                  Shehnaayi yun goonji, sabki aankhein bhar <span className="font-normal font-sans not-italic text-lg text-primary">आयीं</span> re&rdquo;
+                  &ldquo;Phullaan naal sajjeya jehda, koyi aisa vehda hove...<br />
+                  Gaddi saadi jithe jaave, koyi dhol vaje te chann khidda hove&rdquo;
                 </p>
 
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-gold-deep not-italic font-semibold">
-                  ( X 2 )
+                  ✨
                 </p>
 
                 <p className="text-primary/95">
-                  &ldquo;Solah baras ke do qadam, <span className="font-normal font-sans not-italic text-lg text-primary">चौखट</span> ke baahar kya gaye...<br />
-                  Teri <span className="font-normal font-sans not-italic text-lg text-primary">कुड़माई</span> ke din aa gaye.&rdquo;
+                  &ldquo;Tere naal jodi saadi, Rab ne banayi ae...<br />
+                  Khushiyan di rut aayi, shagna di shaam aayi ae.&rdquo;
                 </p>
               </div>
 

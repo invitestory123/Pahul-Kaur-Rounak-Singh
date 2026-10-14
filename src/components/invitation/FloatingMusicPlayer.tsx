@@ -11,13 +11,13 @@ export function FloatingMusicPlayer() {
 
   // Send play/pause commands to YouTube iframe whenever isPlaying changes
   useEffect(() => {
-    const send = (func: "playVideo" | "pauseVideo") => {
+    const send = (func: string, args: unknown = "") => {
       if (iframeRef.current && iframeRef.current.contentWindow) {
         iframeRef.current.contentWindow.postMessage(
           JSON.stringify({
             event: "command",
             func,
-            args: "",
+            args,
           }),
           "*"
         );
@@ -25,10 +25,21 @@ export function FloatingMusicPlayer() {
     };
 
     if (isPlaying) {
+      send("unMute");
+      send("setVolume", [100]);
       send("playVideo");
-      const t1 = setTimeout(() => send("playVideo"), 300);
-      const t2 = setTimeout(() => send("playVideo"), 800);
-      const t3 = setTimeout(() => send("playVideo"), 1500);
+      const t1 = setTimeout(() => {
+        send("unMute");
+        send("playVideo");
+      }, 400);
+      const t2 = setTimeout(() => {
+        send("unMute");
+        send("playVideo");
+      }, 1000);
+      const t3 = setTimeout(() => {
+        send("unMute");
+        send("playVideo");
+      }, 2000);
       return () => {
         clearTimeout(t1);
         clearTimeout(t2);
@@ -46,6 +57,14 @@ export function FloatingMusicPlayer() {
         iframeRef.current?.contentWindow?.postMessage(
           JSON.stringify({
             event: "command",
+            func: "unMute",
+            args: "",
+          }),
+          "*"
+        );
+        iframeRef.current?.contentWindow?.postMessage(
+          JSON.stringify({
+            event: "command",
             func: "playVideo",
             args: "",
           }),
@@ -57,14 +76,14 @@ export function FloatingMusicPlayer() {
 
   return (
     <>
-      {/* Hidden YouTube player with JavaScript API */}
-      <div className="hidden">
+      {/* Offscreen YouTube player with JavaScript API (keeps audio thread alive unlike display:none) */}
+      <div className="fixed -top-[9999px] -left-[9999px] h-1 w-1 overflow-hidden opacity-0 pointer-events-none" aria-hidden="true">
         <iframe
           ref={iframeRef}
           onLoad={onIframeLoad}
-          width="100"
-          height="100"
-          src={`https://www.youtube.com/embed/${invitation.music.youtubeId}?enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}&loop=1&playlist=${invitation.music.youtubeId}`}
+          width="200"
+          height="200"
+          src={`https://www.youtube.com/embed/${invitation.music.youtubeId}?enablejsapi=1&loop=1&playlist=${invitation.music.youtubeId}`}
           title="Floating Background Player"
           allow="autoplay; encrypted-media"
         />

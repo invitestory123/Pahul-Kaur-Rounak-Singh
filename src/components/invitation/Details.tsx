@@ -1,5 +1,19 @@
-import { motion } from "motion/react";
-import { CalendarPlus, Clock, MapPin, Shirt, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  CalendarPlus,
+  Clock,
+  MapPin,
+  Sparkles,
+  Music,
+  Flame,
+  Sun,
+  Heart,
+  Gift,
+  BookOpen,
+  Crown,
+  CalendarDays,
+} from "lucide-react";
 const mapPlate = "https://media.invitestory.in/ever-after-bloom/src/assets/map-plate.jpg";
 const car = "https://media.invitestory.in/ever-after-bloom/src/assets/wedding-car.png";
 import { invitation } from "@/content/invitation";
@@ -7,42 +21,49 @@ import { Ornament, Reveal, SectionTitle } from "./Reveal";
 
 function buildIcs() {
   const start = new Date(invitation.dateISO);
-  const end = new Date(start.getTime() + 5 * 3_600_000);
+  const end = new Date(start.getTime() + 6 * 3_600_000);
   const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Wedding Storybook//EN",
+    "PRODID:-//Pahul & Rounak Wedding//EN",
     "BEGIN:VEVENT",
     `UID:${start.getTime()}@wedding`,
     `DTSTAMP:${stamp(new Date())}`,
     `DTSTART:${stamp(start)}`,
     `DTEND:${stamp(end)}`,
-    `SUMMARY:${invitation.couple.bride} & ${invitation.couple.groom} — Wedding`,
+    `SUMMARY:${invitation.couple.groom} & ${invitation.couple.bride} — Anand Karaj & Wedding Celebrations`,
     `LOCATION:${invitation.venue.name}, ${invitation.venue.address}`,
-    "DESCRIPTION:We would be honoured to have you with us.",
+    "DESCRIPTION:Our family warmly welcomes you to celebrate the Anand Karaj and wedding of Rounak Singh and Pahul Kaur.",
     "END:VEVENT",
     "END:VCALENDAR",
   ];
   return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
 }
 
-const cards = [
-  { icon: Sparkles, label: "The Day", value: invitation.dateLabel },
-  { icon: Clock, label: "The Hour", value: invitation.timeLabel },
-  { icon: MapPin, label: "The Place", value: `${invitation.venue.name} · ${invitation.venue.address}` },
-  { icon: Shirt, label: "Dress Code", value: invitation.dressCode },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+  Sparkles,
+  Music,
+  Flame,
+  Sun,
+  Heart,
+  Gift,
+  BookOpen,
+  Crown,
+};
 
 export function Details() {
+  const [selectedDay, setSelectedDay] = useState<number>(0);
+
   const maps =
-    ("mapsUrl" in invitation.venue && (invitation.venue as any).mapsUrl) ||
+    ("mapsUrl" in invitation.venue && invitation.venue.mapsUrl) ||
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       invitation.venue.mapsQuery,
     )}`;
 
   return (
-    <section id="details" className="relative overflow-hidden px-5 py-24">
+    <section id="itinerary" className="relative overflow-hidden px-5 py-24 scroll-mt-6">
+      <div id="details" className="absolute -top-10" />
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -51,56 +72,200 @@ export function Details() {
             "linear-gradient(180deg, color-mix(in oklab, var(--peach) 26%, var(--ivory)) 0%, var(--cream) 45%, var(--ivory) 100%)",
         }}
       />
-      <div className="mx-auto max-w-4xl">
-        <SectionTitle eyebrow="Chapter Two" title="Where the story gathers" />
+
+      <div className="mx-auto max-w-5xl">
+        <SectionTitle
+          eyebrow="Wedding Itinerary"
+          title="The Celebrations"
+          note="Four days of love, laughter & sacred ceremonies"
+        />
         <Ornament className="mt-8" />
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2">
-          {cards.map((c, i) => (
-            <Reveal key={c.label} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 200, damping: 18 }}
-                className="plate paper-grain h-full rounded-[1.6rem] px-6 py-7"
+        {/* Day selection tabs for quick navigation */}
+        <div className="mt-10 flex flex-wrap justify-center gap-2 sm:gap-3">
+          {invitation.itinerary.map((item, idx) => {
+            const isSelected = selectedDay === idx;
+            return (
+              <button
+                key={item.date}
+                type="button"
+                onClick={() => setSelectedDay(idx)}
+                className={`relative rounded-full px-4 py-2 font-sans text-xs tracking-wider uppercase transition-all cursor-pointer ${
+                  isSelected
+                    ? "bg-primary text-primary-foreground shadow-md font-semibold"
+                    : "glass-plate text-primary hover:bg-white/70"
+                }`}
               >
-                <c.icon className="text-gold-deep" size={20} strokeWidth={1.4} />
-                <p className="mt-4 font-sans text-[0.6rem] tracking-[0.36em] text-gold-deep uppercase">
-                  {c.label}
-                </p>
-                <p className="mt-2 font-display text-lg leading-snug text-primary">{c.value}</p>
-              </motion.div>
-            </Reveal>
-          ))}
+                <span>{item.date.split(" ")[0]} Dec · {item.title.split("&")[0].trim()}</span>
+              </button>
+            );
+          })}
         </div>
 
-        <Reveal delay={0.1} className="mt-8 flex flex-wrap justify-center gap-3">
-          <motion.a
-            href={buildIcs()}
-            download="wedding.ics"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-sans text-[0.66rem] tracking-[0.24em] text-primary-foreground uppercase"
-          >
-            <CalendarPlus size={15} strokeWidth={1.6} /> Add to Calendar
-          </motion.a>
-          <motion.a
-            href={maps}
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="glass-plate inline-flex items-center gap-2 rounded-full px-6 py-3 font-sans text-[0.66rem] tracking-[0.24em] text-primary uppercase"
-          >
-            <MapPin size={15} strokeWidth={1.6} /> Get Directions
-          </motion.a>
+        {/* 4-Day Timeline Grid */}
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {invitation.itinerary.map((dayItem, dayIdx) => {
+            const isSelected = selectedDay === dayIdx;
+            return (
+              <Reveal key={dayItem.date} delay={dayIdx * 0.08}>
+                <motion.div
+                  onClick={() => setSelectedDay(dayIdx)}
+                  whileHover={{ y: -4 }}
+                  className={`plate paper-grain relative flex h-full flex-col justify-between rounded-[1.8rem] p-6 text-left transition-all cursor-pointer ${
+                    isSelected ? "ring-2 ring-gold shadow-lg" : "hover:border-gold/60"
+                  }`}
+                >
+                  <div>
+                    {/* Date Badge */}
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-gold/20 px-3 py-1 font-sans text-[0.6rem] font-bold tracking-[0.2em] text-gold-deep uppercase">
+                        {dayItem.badge}
+                      </span>
+                      <span className="font-sans text-[0.68rem] tracking-wider text-muted-foreground uppercase">
+                        {dayItem.dayName}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-4 font-display text-xl leading-snug text-primary">
+                      {dayItem.date}
+                    </h3>
+                    <p className="mt-1 font-script text-base italic text-gold-deep">
+                      {dayItem.tagline}
+                    </p>
+
+                    <div className="my-4 h-px w-full bg-gold/20" />
+
+                    {/* Events list for this day */}
+                    <div className="space-y-4">
+                      {dayItem.events.map((evt, evtIdx) => {
+                        const IconComponent = iconMap[evt.icon] || Sparkles;
+                        return (
+                          <div key={evtIdx} className="group">
+                            <div className="flex items-start gap-2.5">
+                              <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-deep">
+                                <IconComponent size={13} />
+                              </span>
+                              <div>
+                                <h4 className="font-display text-sm font-semibold text-primary">
+                                  {evt.name}
+                                </h4>
+                                <div className="mt-0.5 flex items-center gap-1 font-sans text-xs font-semibold text-gold-deep">
+                                  <Clock size={12} />
+                                  <span>{evt.time}</span>
+                                </div>
+                                <p className="mt-1 font-sans text-[0.74rem] leading-relaxed text-muted-foreground">
+                                  {evt.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-3 border-t border-gold/15 flex justify-end">
+                    <span className="font-script text-xs italic text-primary/60">
+                      Celebration · {dayItem.title}
+                    </span>
+                  </div>
+                </motion.div>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        {/* Wedding Venue & Ceremony Details Card */}
+        <Reveal delay={0.16} className="mt-14">
+          <div className="plate paper-grain rounded-[2.2rem] p-6 sm:p-10">
+            <div className="grid gap-8 sm:grid-cols-3 text-center sm:text-left divide-y sm:divide-y-0 sm:divide-x divide-gold/25">
+              {/* Auspicious Ceremony */}
+              <div className="sm:pr-6 pb-6 sm:pb-0">
+                <div className="flex items-center justify-center sm:justify-start gap-2 text-gold-deep">
+                  <Crown size={18} />
+                  <span className="font-sans text-[0.62rem] tracking-[0.3em] uppercase font-bold">
+                    Main Ceremony
+                  </span>
+                </div>
+                <h4 className="mt-2 font-display text-2xl text-primary">
+                  Anand Karaj
+                </h4>
+                <p className="mt-1 font-sans text-xs text-muted-foreground">
+                  The holy Sikh wedding union
+                </p>
+                <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1 font-sans text-xs font-semibold text-primary">
+                  <Clock size={13} className="text-gold-deep" />
+                  <span>10:00 AM Morning</span>
+                </div>
+              </div>
+
+              {/* Date */}
+              <div className="sm:px-6 py-6 sm:py-0">
+                <div className="flex items-center justify-center sm:justify-start gap-2 text-gold-deep">
+                  <CalendarDays size={18} />
+                  <span className="font-sans text-[0.62rem] tracking-[0.3em] uppercase font-bold">
+                    The Wedding Day
+                  </span>
+                </div>
+                <h4 className="mt-2 font-display text-2xl text-primary">
+                  19 December 2026
+                </h4>
+                <p className="mt-1 font-script text-base italic text-gold-deep">
+                  Saturday · Auspicious Muhurat
+                </p>
+                <div className="mt-3 font-sans text-xs text-muted-foreground">
+                  Followed by grand celebratory feast
+                </div>
+              </div>
+
+              {/* Venue */}
+              <div className="sm:pl-6 pt-6 sm:pt-0">
+                <div className="flex items-center justify-center sm:justify-start gap-2 text-gold-deep">
+                  <MapPin size={18} />
+                  <span className="font-sans text-[0.62rem] tracking-[0.3em] uppercase font-bold">
+                    The Venue
+                  </span>
+                </div>
+                <h4 className="mt-2 font-display text-2xl text-primary">
+                  {invitation.venue.name}
+                </h4>
+                <p className="mt-1 font-sans text-xs leading-relaxed text-muted-foreground">
+                  {invitation.venue.address}
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Action Buttons */}
+            <div className="mt-8 pt-6 border-t border-gold/25 flex flex-wrap justify-center gap-3">
+              <motion.a
+                href={buildIcs()}
+                download="Rounak-Pahul-Wedding.ics"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-sans text-xs tracking-[0.2em] font-semibold text-primary-foreground uppercase shadow-md cursor-pointer"
+              >
+                <CalendarPlus size={15} strokeWidth={1.8} /> Add to Calendar
+              </motion.a>
+              <motion.a
+                href={maps}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="glass-plate inline-flex items-center gap-2 rounded-full border border-gold/60 px-7 py-3 font-sans text-xs tracking-[0.2em] font-semibold text-primary uppercase shadow-sm cursor-pointer hover:bg-white/70"
+              >
+                <MapPin size={15} strokeWidth={1.8} className="text-gold-deep" /> Get Directions
+              </motion.a>
+            </div>
+          </div>
         </Reveal>
 
         {/* Illustrated map plate with the wedding car rolling in */}
-        <Reveal delay={0.14} className="mt-12">
+        <Reveal delay={0.2} className="mt-12">
           <div className="plate relative overflow-hidden rounded-[2rem]">
             <img
               src={mapPlate}
-              alt="Hand-painted illustrated map of the old city with the palace marked"
+              alt="Hand-painted illustrated map of the palace and venue"
               loading="lazy"
               width={1280}
               height={1024}
