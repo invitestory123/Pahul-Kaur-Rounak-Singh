@@ -131,13 +131,13 @@ export function Hero() {
           className="mt-5 sm:mt-6 flex flex-col items-center justify-center text-center font-calligraphy text-primary drop-shadow-[0_2px_14px_rgba(255,255,255,0.75)]"
         >
           <span className="text-5xl sm:text-7xl md:text-8xl leading-[1.05] font-normal tracking-wide">
-            {invitation.couple.groom}
+            {invitation.couple.bride}
           </span>
           <span className="my-0.5 sm:my-1.5 font-script text-2xl sm:text-3xl italic text-gold-deep">
             &amp;
           </span>
           <span className="text-5xl sm:text-7xl md:text-8xl leading-[1.05] font-normal tracking-wide">
-            {invitation.couple.bride}
+            {invitation.couple.groom}
           </span>
         </motion.div>
 

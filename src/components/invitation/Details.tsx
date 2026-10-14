@@ -32,9 +32,9 @@ function buildIcs() {
     `DTSTAMP:${stamp(new Date())}`,
     `DTSTART:${stamp(start)}`,
     `DTEND:${stamp(end)}`,
-    `SUMMARY:${invitation.couple.groom} & ${invitation.couple.bride} — Anand Karaj & Wedding Celebrations`,
+    `SUMMARY:${invitation.couple.bride} & ${invitation.couple.groom} — Anand Karaj & Wedding Celebrations`,
     `LOCATION:${invitation.venue.name}, ${invitation.venue.address}`,
-    "DESCRIPTION:Our family warmly welcomes you to celebrate the Anand Karaj and wedding of Rounak Singh and Pahul Kaur.",
+    `DESCRIPTION:Our family warmly welcomes you to celebrate the Anand Karaj and wedding of ${invitation.couple.bride} and ${invitation.couple.groom}.`,
     "END:VEVENT",
     "END:VCALENDAR",
   ];
@@ -239,7 +239,7 @@ export function Details() {
             <div className="mt-8 pt-6 border-t border-gold/25 flex flex-wrap justify-center gap-3">
               <motion.a
                 href={buildIcs()}
-                download="Rounak-Pahul-Wedding.ics"
+                download="Pahul-Rounak-Wedding.ics"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-sans text-xs tracking-[0.2em] font-semibold text-primary-foreground uppercase shadow-md cursor-pointer"

@@ -7,7 +7,7 @@ export const invitation = {
   couple: {
     groom: "Rounak Singh",
     bride: "Pahul Kaur",
-    initials: "R & P",
+    initials: "P & R",
   },
   /** ISO date-time of the main wedding ceremony, used by the countdown and calendar file. */
   dateISO: "2026-12-19T10:00:00+05:30",
@@ -23,7 +23,7 @@ export const invitation = {
   hero: {
     kicker: "Our family warmly welcomes you",
     eyebrow: "Click to open invite",
-    blessing: "Two souls, one sacred journey",
+    blessing: "Two souls, one beautiful journey",
   },
   itinerary: [
     {
@@ -183,7 +183,7 @@ export const invitation = {
   footer: {
     line1: "Come celebrate with us.",
     line2: "Eat good food, dance with all your heart.",
-    signoff: "With all our love, Rounak & Pahul",
+    signoff: "With all our love, Pahul & Rounak",
   },
 } as const;
 

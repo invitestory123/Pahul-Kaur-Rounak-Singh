@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { X, ZoomIn } from "lucide-react";
-const couple = "https://media.invitestory.in/ever-after-bloom/src/assets/couple-lanterns.png";
 import { galleryPhotos } from "@/content/invitation";
 import { Ornament, Reveal, SectionTitle } from "./Reveal";
 
@@ -61,20 +60,6 @@ export function Gallery() {
             </Reveal>
           ))}
         </div>
-
-        {/* Floating illustrated couple */}
-        <Reveal delay={0.2} className="mt-14 flex justify-center">
-          <motion.img
-            src={couple}
-            alt="Illustration of the bride and groom looking up at rising lanterns"
-            loading="lazy"
-            width={556}
-            height={908}
-            className="w-40 sm:w-52"
-            animate={reduced ? {} : { y: [0, -7, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </Reveal>
       </div>
 
       <AnimatePresence>
