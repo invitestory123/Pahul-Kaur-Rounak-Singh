@@ -45,12 +45,12 @@ export const invitation = {
       date: "17 December 2026",
       dayName: "Thursday",
       badge: "Day 2",
-      title: "Akhand Path Sahib & Jago Night",
+      title: "Sukhmani Sahib & Jago Night",
       tagline: "Divine Blessings & Vibrant Celebrations",
       events: [
         {
-          name: "Bhog shree akhandpath sahib",
-          time: "9:00 AM",
+          name: "Bhog shree sukhmani sahib",
+          time: "11:00 AM",
           description: "Seeking Waheguru's divine grace with the culmination of the holy recitation.",
           icon: "BookOpen",
         },
